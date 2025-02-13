@@ -2,11 +2,12 @@ import { Outlet } from "react-router"
 import Navbar from "./ui/Navbar/Navbar"
 import Footer from "./ui/Footer/Footer"
 
-import { Container } from "@mui/material"
+import { Box, Container } from "@mui/material"
 
 const Layout  = () => {
   return (
-    <Container fixed>
+    <Container fixed sx={{display: 'flex', flexDirection: 'column', minHeight: '97vh'}}>
+      <Box sx={{paddingTop: 10}} />
       <Navbar />
       <Outlet />
       <Footer />
