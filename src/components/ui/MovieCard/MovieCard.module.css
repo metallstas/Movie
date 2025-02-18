@@ -1,0 +1,21 @@
+.img {
+	width: 215px;
+	transition: transform 0.5s;
+	height: 320px;
+}
+
+.img:hover {
+	transform: scale(1.05);
+}
+
+.card {
+	display: flex;
+	flex-direction: column;
+	margin: 10px;
+	justify-content: space-between;
+}
+
+.card__link {
+	display: flex;
+	flex-direction: column;
+}

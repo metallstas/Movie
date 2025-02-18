@@ -1,23 +1,34 @@
-import { Stack } from "@mui/material"
-import { Link } from "react-router"
+import { Pagination, Stack } from "@mui/material"
+import MovieCard, { IMovie } from "../MovieCard/MovieCard"
 
 interface IMoviesList {
-    movies: [],
+    movies: IMovie[],
     page: number,
-    setPage: (prevNum: number) => void,
+    setPage: React.Dispatch<React.SetStateAction<number>>,
     totalPages: number
 }
 
 const MoviesList = ({movies, page, setPage, totalPages}: IMoviesList) => {
-    console.log(page)
+
   return (
     <>
-      <Stack>
-          <Stack>
-            <Link to={`movie/${movie.kinopoiskId}`}>
-            </Link>
-          </Stack>
+      <Stack direction="row" justifyContent='center' flexWrap='wrap' >
+          {movies.map((movie: IMovie) => <MovieCard key={movie.kinopoiskId} movie={movie}/>)}
       </Stack>
+      <Pagination 
+        sx={{margin: '0 auto'}} 
+        count={totalPages} 
+        color="primary" 
+        onChange={(_, value) => {
+          window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+          })
+          setPage(value)
+        }}
+        variant="outlined"
+        shape="rounded"
+        page={page}/>
     </>
   )
 }
