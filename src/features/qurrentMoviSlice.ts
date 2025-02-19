@@ -1,20 +1,20 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 export interface IInitialState {
-    countries: string,
-    gengreId: string,
+    countries: number,
+    gengreId: number,
     order: string,
     type: string,
-    year: string,
+    year: number,
     page: number,
 }
 
-const initialState: any = {
-    countries: '',
-    gengreId: '',
-    order: 'NUM_VOTE',
+const initialState: IInitialState = {
+    countries: 0,
+    gengreId: 0,
+    order: '',
     type: '',
-    year: '',
+    year: 0,
     page: 1,
 }
 
