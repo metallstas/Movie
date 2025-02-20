@@ -1,4 +1,5 @@
 import useMoviesQuery from "../../../hooks/useMoviesQuery"
+import Slider from "../../ui/Carousel/Carousel"
 
 const Movies = () => {
   const {
@@ -10,13 +11,24 @@ const Movies = () => {
     responsePopular,
     responseSerials,
   } = useMoviesQuery()
-  console.log(responseBest.data)
+  console.log(responseBest.data ? responseBest.data.items : null)
+
+  if (isLoading) {
+    return <h2>Loading...</h2>
+  }
+
+  if (hasError) {
+    return <h2>Some error</h2>
+  }
 
   return (
     <>
-      {isLoading && <h2>Loading...</h2>}
-      {hasError && <h2>Some error</h2>}
-      <div>Movies</div>
+      {/* Todo add skeleton */}
+      {/* todo add error component */}
+      {!isLoading && responseBest.data ?
+        <Slider items={responseBest.data?.items.map(el => el.posterUrlPreview)}/> :
+        <h2>No Films</h2>
+      }
     </>
   )
 }

@@ -29,11 +29,11 @@ const MoviesListTop: React.FC = () => {
         <Button startIcon={<ArrowBack />} onClick={() => navigate(-1)} ></Button>
         <Typography variant="h4">{collection?.title}</Typography>
       </Stack>
-      <MoviesList 
+      {data ? <MoviesList 
         movies={data.items} 
         totalPages={data.totalPages}
-        page={data.page}
-        setPage={setPage}/>
+        page={page}
+        setPage={setPage}/>: <h2>No Movies</h2>}
     </>
   )
 }

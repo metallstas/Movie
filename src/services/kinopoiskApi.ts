@@ -12,6 +12,12 @@ interface IFilm {
     page: number,
 }
 
+export interface IData {
+    items: IMovie[], 
+    total: number, 
+    totalPages: number,
+}
+
 export const kinopoiskApi = createApi({
     reducerPath: 'kinopoiskApi',
     baseQuery: fetchBaseQuery({
@@ -22,11 +28,11 @@ export const kinopoiskApi = createApi({
         }
     }),
     endpoints: (builder) => ({
-        getFilmsTop: builder.query<IMovie[], {type: string, page: number}>({
+        getFilmsTop: builder.query<IData, {type: string, page: number}>({
             query: ({type, page}) => `/v2.2/films/collections?type=${type}&page=${page}`,
         
         }),
-        getFilms: builder.query<any, IFilm>({
+        getFilms: builder.query<IData, IFilm>({
             query: ({
                 countries,
                 gengreId,
