@@ -26,7 +26,6 @@ const Carus = ({children, slidesToShow, slidesToScroll = 1}: ICarus) => {
     useEffect(() => {
         const slides = 100 / slidesToShow
         setSlidesShow(100 / slidesToShow)
-        console.log(slidesShow)
         setPages(
             Children.map(children, child => {
                 return cloneElement(child, {
