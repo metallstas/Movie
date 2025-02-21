@@ -1,4 +1,6 @@
+import { Link as RouterLink } from "react-router"
 import useMoviesQuery from "../../../hooks/useMoviesQuery"
+import { Link, Stack } from "@mui/material"
 import Slider from "../../ui/Carousel/Carousel"
 
 const Movies = () => {
@@ -13,6 +15,34 @@ const Movies = () => {
   } = useMoviesQuery()
   console.log(responseBest.data ? responseBest.data.items : null)
 
+  const carouselArr = [
+    {
+      title: 'Популярные фильмы',
+      url: '/popular',
+      data: responsePopular.data?.items,
+    },
+    {
+      title: 'Лучшие фильмы',
+      url: '/best',
+      data: responseBest.data?.items,
+    },
+    {
+      title: 'Фильмы',
+      url: '/films',
+      data: responseFilms.data?.items,
+    },
+    {
+      title: 'Сериалы',
+      url: '/serials',
+      data: responseSerials.data?.items,
+    },
+    {
+      title: 'Мультфильмы',
+      url: '/cartoons',
+      data: responseCartoons.data?.items,
+    }
+  ]
+
   if (isLoading) {
     return <h2>Loading...</h2>
   }
@@ -22,14 +52,29 @@ const Movies = () => {
   }
 
   return (
-    <>
-      {/* Todo add skeleton */}
-      {/* todo add error component */}
-      {!isLoading && responseBest.data ?
-        <Slider items={responseBest.data?.items.map(el => el.posterUrlPreview)}/> :
-        <h2>No Films</h2>
-      }
-    </>
+      <Stack>
+        {carouselArr.map(el => {
+          return (
+            <div key={el.title}>
+              <Link 
+                sx={{mt: 2, mb: 2}} 
+                to={carouselArr[0].url} 
+                variant="h4" 
+                component={RouterLink}>
+                  {el.title}
+                </Link>
+              {!isLoading && el.data ?
+                <Slider items={el.data.map(film => {
+                  return {
+                    poster: film.posterUrlPreview,
+                    id: film.kinopoiskId, 
+                  }
+                })}/> :
+                <h2>No Films</h2>}
+              </div>
+          )
+        })}
+      </Stack>
   )
 }
 

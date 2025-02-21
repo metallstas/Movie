@@ -97,7 +97,7 @@ export const MOVIE_LISTS: ITop[] = [
     {
         title: 'Фильмы',
         icon: LocalMovies,
-        url: '/movies',
+        url: '/films',
         value: '',
     },
     {

@@ -5,7 +5,7 @@ import Slider from 'react-slick'
 import style from './Carousel.module.css'
 
 interface ICarousel {
-  items: string[],
+  items: {poster: string, id: number}[],
 }
 
 const Carousel = ({items}: ICarousel) => {
@@ -32,15 +32,15 @@ const Carousel = ({items}: ICarousel) => {
     );
   }
 
-
   const settings = {
     dots: false,
-    infinite: false,
+    infinite: true,
     speed: 500,
-    slidesToShow: 5,
-    slidesToScroll: 5,
+    slidesToShow: 6,
+    slidesToScroll: 1,
     accessibility: true,
     adaptiveHeight: true,
+    autoplay: true,
     arrows: true,
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
@@ -58,6 +58,7 @@ const Carousel = ({items}: ICarousel) => {
           slidesToShow: 2,
           slidesToScroll: 2,
           arrows: false,
+          autoplay: true,
         }
       },
       {
@@ -66,17 +67,19 @@ const Carousel = ({items}: ICarousel) => {
           slidesToShow: 1,
           slidesToScroll: 1,
           arrows: false,
+          autoplay: true,
         }
       }
     ]
   }
  
   return (
-    <div className="slider-container">
+    <div className={style.container}>
       <Slider {...settings}>
-        {items.map((el, i) => <div key={i}>
-          <img tabIndex={1} className={style.img} src={el}/>
-        </div>)}
+        {items.map((film, i) => (
+        <Link to={`/movie/${film.id}`} key={i}>
+          <img tabIndex={1} className={style.img} src={film.poster}/>
+        </Link>))}
       </Slider>
     </div>
   )

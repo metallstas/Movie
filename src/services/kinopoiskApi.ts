@@ -34,17 +34,20 @@ export const kinopoiskApi = createApi({
         }),
         getFilms: builder.query<IData, IFilm>({
             query: ({
-                countries,
+                // countries,
                 gengreId,
                 order = 'NUM_VOTE',
                 type = 'FILM',
-                year,
+                // year,
                 page,
-            }) => `/v2.2/films?countries=${countries}&genres=${gengreId}&order=${order}&type=${type}&year=${year}&page=${page}`,
+            }) => `/v2.2/films?genres=${gengreId}&order=${order}&type=${type}&ratingFrom=0&ratingTo=10&yearFrom=1000&yearTo=3000&page=${page}`,
+        }),
+        getFilmById: builder.query<any, {id: number}>({
+            query: ({id}) => `/v2.2/films/${id}`
         })
-
+        // https://kinopoiskapiunofficial.tech/api/v2.2/films?genres=18&order=NUM_VOTE&type=FILM&ratingFrom=0&ratingTo=10&yearFrom=1000&yearTo=3000&page=1
     })
 
 })
 
-export const {useGetFilmsTopQuery, useGetFilmsQuery} = kinopoiskApi
+export const {useGetFilmsTopQuery, useGetFilmsQuery, useGetFilmByIdQuery} = kinopoiskApi
