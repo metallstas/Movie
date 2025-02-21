@@ -1,0 +1,27 @@
+.carousel__item {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	user-select: none;
+	width: 400px;
+}
+
+.item_1 {
+	background-color: blue;
+}
+
+.item_2 {
+	background-color: red;
+}
+
+.item_3 {
+	background-color: yellow;
+}
+
+.item_4 {
+	background-color: green;
+}
+
+.item_5 {
+	background-color: grey;
+}

@@ -1,0 +1,22 @@
+.carousel {
+	display: flex;
+	align-items: center;
+	margin: 0 auto;
+	height: 150px;
+	width: 100%;
+}
+
+.arrow {
+	cursor: pointer;
+}
+
+.window {
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+}
+
+.all_items_container {
+	display: flex;
+	height: 100%;
+}
