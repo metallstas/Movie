@@ -2,6 +2,7 @@ import { Link as RouterLink } from "react-router"
 import useMoviesQuery from "../../../hooks/useMoviesQuery"
 import { Link, Stack } from "@mui/material"
 import Slider from "../../ui/Carousel/Carousel"
+import ErrorMessage from "../../ui/ErrorMessage/ErrorMessage"
 
 const Movies = () => {
   const {
@@ -48,7 +49,7 @@ const Movies = () => {
   }
 
   if (hasError) {
-    return <h2>Some error</h2>
+    return <ErrorMessage />
   }
 
   return (

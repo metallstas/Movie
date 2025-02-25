@@ -16,57 +16,21 @@ const CarouselFilm = ({items}: ICarousel) => {
       slidesToSlide: 1 // optional, default to 1.
     },
     tablet: {
-      breakpoint: { max: 900, min: 460 },
+      breakpoint: { max: 900, min: 500 },
       items: 3,
       slidesToSlide: 1 // optional, default to 1.
     },
-    mobile: {
-      breakpoint: { max: 460, min: 0 },
+    bigMobile: {
+      breakpoint: { max: 500, min: 300 },
       items: 2,
+      slidesToSlide: 1
+    },
+    mobile: {
+      breakpoint: { max: 300, min: 0 },
+      items: 1,
       slidesToSlide: 1,
       autoPlay: false, // optional, default to 1.
     }
-  };
-
-  // const settings = {
-  //   swipeable={false}
-  //   draggable={false}
-  //   showDots={true}
-  //   responsive={responsive}
-  //   ssr={true} // means to render carousel on server-side.
-  //   infinite={true}
-  //   autoPlay={this.props.deviceType !== "mobile" ? true : false}
-  //   autoPlaySpeed={1000}
-  //   keyBoardControl={true}
-  //   customTransition="all .5"
-  //   transitionDuration={500}
-  //   containerClass="carousel-container"
-  //   removeArrowOnDeviceType={["tablet", "mobile"]}
-  //   deviceType={this.props.deviceType}
-  //   dotListClass="custom-dot-list-style"
-  //   itemClass="carousel-item-padding-40-px"
-  // }
-
-  function SampleNextArrow(props: any) {
-    const { className, style, onClick } = props;
-    return (
-      <div
-        className={className}
-        style={{ ...style, display: "block", background: 'grey', borderRadius: '100%'}}
-        onClick={onClick}
-      />
-    );
-  }
-  
-  function SamplePrevArrow(props: any) {
-    const { className, style, onClick } = props;
-    return (
-      <div
-        className={className}
-        style={{ ...style, display: "block", background: 'grey', borderRadius: '100%' }}
-        onClick={onClick}
-      />
-    );
   }
  
   return (
@@ -76,7 +40,7 @@ const CarouselFilm = ({items}: ICarousel) => {
         draggable={true}
         showDots={false}
         infinite={true}
-        autoPlay={true}
+        autoPlay={responsive.mobile ? false : true}
         minimumTouchDrag={50}
         autoPlaySpeed={3000}
         keyBoardControl={true}
