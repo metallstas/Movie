@@ -5,6 +5,8 @@ import { useLocation, useNavigate } from "react-router"
 import { Button, Stack, Typography } from "@mui/material"
 import MoviesList from "../../ui/MoviesList/MoviesList"
 import { ArrowBack } from "@mui/icons-material"
+import ErrorMessage from "../../ui/ErrorMessage/ErrorMessage"
+import MovieListSkeleton from "../../ui/MovieListSkeleton/MovieListSkeleton"
 
 const MoviesListTop: React.FC = () => {
   const location = useLocation()
@@ -19,9 +21,9 @@ const MoviesListTop: React.FC = () => {
 
   const {data, error, isLoading} = useGetFilmsTopQuery({type: collection ? collection.value : '', page})
 
-  if (error) return <h2>Some error</h2>
+  if (error) return <ErrorMessage />
 
-  if (isLoading) return <h2>Loading...</h2>
+  if (isLoading) return <MovieListSkeleton />
 
   return (
     <>

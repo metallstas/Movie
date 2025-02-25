@@ -3,6 +3,7 @@ import useMoviesQuery from "../../../hooks/useMoviesQuery"
 import { Link, Stack } from "@mui/material"
 import Slider from "../../ui/Carousel/Carousel"
 import ErrorMessage from "../../ui/ErrorMessage/ErrorMessage"
+import MoviesSkeleton from "./MoviesSkeleton"
 
 const Movies = () => {
   const {
@@ -45,7 +46,7 @@ const Movies = () => {
   ]
 
   if (isLoading) {
-    return <h2>Loading...</h2>
+    return <MoviesSkeleton />
   }
 
   if (hasError) {
