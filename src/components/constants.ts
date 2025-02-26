@@ -98,18 +98,18 @@ export const MOVIE_LISTS: ITop[] = [
         title: 'Фильмы',
         icon: LocalMovies,
         url: '/films',
-        value: '',
+        value: 'FILM',
     },
     {
         title: 'Сериалы',
         icon: Reorder,
         url: '/serials',
-        value: '',
+        value: 'TV_SERIES',
     },
     {
         title: 'Мультфильмы',
         icon: Fort,
         url: '/cartoons',
-        value: '',
+        value: 'FILM',
     },
 ]

@@ -47,10 +47,10 @@ const CarouselFilm = ({items}: ICarousel) => {
         keyBoardControl={true}
         customTransition="all .5s"
         transitionDuration={500}
-        containerClass="carousel-container"
         removeArrowOnDeviceType={["tablet", "mobile"]}
         dotListClass="custom-dot-list-style"
-        itemClass="carousel-item-padding-40-px">
+        itemClass="carousel-item-padding-40-px"
+        >
         {items.map((film, i) => (
         <Link to={`/movie/${film.id}`} key={i}>
           <img tabIndex={1} className={style.img} src={film.poster}/>

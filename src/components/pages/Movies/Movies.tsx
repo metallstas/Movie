@@ -15,7 +15,7 @@ const Movies = () => {
     responsePopular,
     responseSerials,
   } = useMoviesQuery()
-  console.log(responseBest.data ? responseBest.data.items : null)
+  // console.log(responseBest.data ? responseBest.data.items : null)
 
   const carouselArr = [
     {
@@ -60,7 +60,7 @@ const Movies = () => {
             <div key={el.title}>
               <Link 
                 sx={{mt: 2, mb: 2}} 
-                to={carouselArr[0].url} 
+                to={el.url} 
                 variant="h4" 
                 component={RouterLink}>
                   {el.title}

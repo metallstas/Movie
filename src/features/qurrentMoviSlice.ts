@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface IInitialState {
     countries: number,
@@ -11,7 +11,7 @@ export interface IInitialState {
 
 const initialState: IInitialState = {
     countries: 0,
-    gengreId: 0,
+    gengreId: 1,
     order: '',
     type: '',
     year: 0,
@@ -21,7 +21,16 @@ const initialState: IInitialState = {
 export const currentMovieSlice = createSlice({
     name: 'currentMovieSlice',
     initialState,
-    reducers: {}
+    reducers: {
+        selectQuery: (state, action: PayloadAction<IInitialState>) => ({
+            ...state,
+            ...action.payload
+        }),
+        resetQuery: () => ({
+            ...initialState,
+        })
+    }
 })
 
+export const {selectQuery, resetQuery} = currentMovieSlice.actions
 export const movieReducer = currentMovieSlice.reducer
