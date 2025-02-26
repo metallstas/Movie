@@ -2,12 +2,14 @@ import { Link } from 'react-router';
 import style from './Carousel.module.css'
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import { useMediaQuery } from '@mui/material';
 
 interface ICarousel {
   items: {poster: string, id: number}[],
 }
 
 const CarouselFilm = ({items}: ICarousel) => {
+  const isMobile = useMediaQuery('(max-width: 600px)')
 
   const responsive = {
     desktop: {
@@ -16,31 +18,30 @@ const CarouselFilm = ({items}: ICarousel) => {
       slidesToSlide: 1 // optional, default to 1.
     },
     tablet: {
-      breakpoint: { max: 900, min: 500 },
+      breakpoint: { max: 1200, min: 700 },
       items: 3,
       slidesToSlide: 1 // optional, default to 1.
     },
-    bigMobile: {
-      breakpoint: { max: 500, min: 300 },
+    mobileBig: {
+      breakpoint: { max: 700, min: 400 },
       items: 2,
-      slidesToSlide: 1
+      slidesToSlide: 1,
     },
     mobile: {
-      breakpoint: { max: 300, min: 0 },
+      breakpoint: { max: 400, min: 0 },
       items: 1,
       slidesToSlide: 1,
-      autoPlay: false, // optional, default to 1.
     }
   }
  
   return (
-    <div className={style.container}>
+    <div>
       <Carousel responsive={responsive}
         swipeable={true}
         draggable={true}
         showDots={false}
         infinite={true}
-        autoPlay={responsive.mobile ? false : true}
+        autoPlay={isMobile ? false : true}
         minimumTouchDrag={50}
         autoPlaySpeed={3000}
         keyBoardControl={true}

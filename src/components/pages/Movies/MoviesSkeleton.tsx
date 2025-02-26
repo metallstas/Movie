@@ -5,9 +5,9 @@ const MoviesSkeleton = () => {
     const isMobile = useMediaQuery('(max-width: 600px)')
   return (
     <Box mt={2} mb={2}>
-        {new Array(5).fill(null).map((_, i) => (
+        {new Array(6).fill(null).map((_, i) => (
             <React.Fragment key={i}>
-                <Box mt={2} mb={2} >
+                <Box mt={2} mb={2} display={'flex'} >
                 <Skeleton 
                     animation='wave'
                     variant="rectangular"
@@ -16,15 +16,14 @@ const MoviesSkeleton = () => {
                     />
                 </Box>
 
-                <Stack direction="row" justifyContent='center' flexWrap={'wrap'}>
+                <Stack direction="row" justifyContent='start'>
                     {new Array(isMobile ? 1 : 6).fill(null).map((_, i) => (
-                        <Box width={'100%'} mr={1} ml={1} key={i}>
+                        <Box mr={1} key={i}>
                             <Skeleton 
-                         
-                        animation='wave'
-                        variant="rectangular"
-                        height={isMobile ? '520px' : '340px'}
-                        width={isMobile ? '100%' : '178px'}/>
+                                animation='wave'
+                                variant="rectangular"
+                                height={isMobile ? '350px' : '265px'}
+                                width={isMobile ? '250px' : '192px'}/>
                         </Box>
 
                     ))}

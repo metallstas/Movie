@@ -1,15 +1,11 @@
 .img {
 	display: block;
 	padding: 0 5px;
-	height: 265px;
+	height: 100%;
 	width: -webkit-fill-available;
 }
 
 .arrow {
 	border-radius: 100%;
 	background: gray;
-}
-
-.container {
-	height: 300px;
 }
