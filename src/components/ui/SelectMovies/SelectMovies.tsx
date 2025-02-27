@@ -1,42 +1,91 @@
 import { Box, Button, FormControl, InputLabel, MenuItem, Select, Stack } from "@mui/material"
+import CloseIcon from '@mui/icons-material/Close'
+import { useGetGenresAndCountriesQuery } from "../../../services/kinopoiskApi"
+import { SelectChangeEvent } from "@mui/material";
+import { useAppDispatch, useAppSelector } from "../../../hooks/hooks";
+import { selectQuery, resetQuery } from "../../../features/qurrentMoviSlice";
 
 const SelectMovies = () => {
+    const {order, country, year, genreId} = useAppSelector(state => state.mainPage)
+    const dispatch = useAppDispatch()
+    const {data, error, isLoading} = useGetGenresAndCountriesQuery()
+
+    const orderList = [{
+        title: 'По рейтингу',
+        value: 'RATING'
+    }, 
+    {
+        title: 'По оценкам',
+        value: 'NUM_VOTE'
+    }]
+
+    const yearsArr = new Array(60).fill(null).map((_, i) => new Date().getFullYear() - i)
+
+    const handleSort = (e: SelectChangeEvent<unknown>) => {
+        dispatch(selectQuery({order: e.target.value}))
+    }
+
+    const handleCountry = (e: SelectChangeEvent<unknown>) => {
+        dispatch(selectQuery({country: e.target.value}))
+    }
+
+    const handleGenres = (e: SelectChangeEvent<unknown>) => {
+        dispatch(selectQuery({genreId: e.target.value}))
+    }
+
+    const handleYear = (e: SelectChangeEvent<unknown>) => {
+        dispatch(selectQuery({year: e.target.value}))
+    }
+
     return (
-        <Stack sx={{display: 'flex', width: '100%', flexDirection: {sm: 'column', md: 'row'}, justifyContent: 'center', alignItems: 'center'}}>
-            <FormControl fullWidth sx={{margin: '0 5px'}}>
+        <Stack sx={{display: 'flex', width: '100%', flexDirection: {sm: 'column', md: 'row', gap: 5}, justifyContent: 'center', alignItems: 'center'}}>
+            <FormControl fullWidth>
                 <InputLabel id="demo-simple-select-label">Сортировка</InputLabel>
-                <Select label="Age">
-                    <MenuItem value={10}>Ten</MenuItem>
-                    <MenuItem value={20}>Twenty</MenuItem>
-                    <MenuItem value={30}>Thirty</MenuItem>
+                <Select 
+                    label="Сортировка" 
+                    value={order}
+                    labelId="demo-simple-select-label"
+                    onChange={handleSort}>
+                    {orderList.map(order => <MenuItem key={order.value} value={order.value}>{order.title}</MenuItem>)}
                 </Select>
             </FormControl>
-            <FormControl fullWidth sx={{margin: '0 5px'}}>
+            <FormControl fullWidth>
                 <InputLabel id="demo-simple-select-label">Страна</InputLabel>
-                <Select label="Age">
-                    <MenuItem value={10}>Ten</MenuItem>
-                    <MenuItem value={20}>Twenty</MenuItem>
-                    <MenuItem value={30}>Thirty</MenuItem>
+                <Select 
+                    label="Страна" 
+                    labelId="demo-simple-select-label"
+                    value={country}
+                    onChange={handleCountry}>
+                    {data?.countries.map(country => <MenuItem key={country.id} value={country.id}>{country.country}</MenuItem>)}
                 </Select>
             </FormControl>
-            <FormControl fullWidth sx={{margin: '0 5px'}}>
+            <FormControl fullWidth>
                 <InputLabel id="demo-simple-select-label">Жанр</InputLabel>
-                <Select label="Age">
-                    <MenuItem value={10}>Ten</MenuItem>
-                    <MenuItem value={20}>Twenty</MenuItem>
-                    <MenuItem value={30}>Thirty</MenuItem>
+                <Select 
+                    label="Жанр" 
+                    labelId="demo-simple-select-label"
+                    value={genreId ? genreId : ''}
+                    onChange={handleGenres}>
+                {data?.genres.map(genre => <MenuItem key={genre.id} value={genre.id}>{genre.genre}</MenuItem>)}
                 </Select>
             </FormControl>
-            <FormControl fullWidth sx={{margin: '0 5px'}}>
+            <FormControl fullWidth>
                 <InputLabel id="demo-simple-select-label">Год</InputLabel>
-                <Select label="Age">
-                    <MenuItem value={10}>Ten</MenuItem>
-                    <MenuItem value={20}>Twenty</MenuItem>
-                    <MenuItem value={30}>Thirty</MenuItem>
+                <Select 
+                    label="Год"
+                    value={year ? year : ''}
+                    defaultValue={0}
+                    onChange={handleYear}>
+                    {yearsArr.map(year => <MenuItem key={year} value={year}>{year}</MenuItem>)}
                 </Select>
             </FormControl>
             <Box>
-                <Button variant="outlined">Сбросить</Button>
+                <Button 
+                    variant="outlined" 
+                    startIcon={<CloseIcon />}
+                    onClick={() => dispatch(resetQuery())}>
+                    Сбросить
+                    </Button>
             </Box>
         </Stack>
     )

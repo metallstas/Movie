@@ -12,11 +12,25 @@ interface IFilm {
     page?: number,
 }
 
+export interface IGenres {
+    id: number,
+    genre: string,
+}
+
+export interface ICountries {
+    id: number,
+    country: string,
+}
+
 export interface IData {
     items: IMovie[], 
     total: number, 
     totalPages: number,
 }
+
+const excludeGenres = [
+    '', 'новости', 'для взрослых', 'церемония', 'реальное ТВ', 'ток-шоу'
+]
 
 export const kinopoiskApi = createApi({
     reducerPath: 'kinopoiskApi',
@@ -45,9 +59,16 @@ export const kinopoiskApi = createApi({
         }),
         getFilmById: builder.query<any, {id: number}>({
             query: ({id}) => `/v2.2/films/${id}`
+        }),
+        getGenresAndCountries: builder.query<{genres: IGenres[], countries: ICountries[]}, void>({
+            query: () => `/v2.2/films/filters`,
+            transformResponse: (response: {genres: IGenres[], countries: ICountries[]}) => ({
+                ...response,
+                genres: response.genres.filter(({genre}) => !excludeGenres.includes(genre))
+            })
         })
     })
 
 })
 
-export const {useGetFilmsTopQuery, useGetFilmsQuery, useGetFilmByIdQuery} = kinopoiskApi
+export const {useGetFilmsTopQuery, useGetFilmsQuery, useGetFilmByIdQuery, useGetGenresAndCountriesQuery} = kinopoiskApi
