@@ -1,35 +1,58 @@
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { useLocation, useNavigate } from "react-router"
 import { Button, Stack, Typography } from "@mui/material"
-import MoviesList from "../../ui/MoviesList/MoviesList"
 import { ArrowBack } from "@mui/icons-material"
-import ErrorMessage from "../../ui/ErrorMessage/ErrorMessage"
-import MovieListSkeleton from "../../ui/MovieListSkeleton/MovieListSkeleton"
 import { MOVIE_LISTS } from "../../constants"
 import { useGetFilmsQuery } from "../../../services/kinopoiskApi"
+import { useAppDispatch, useAppSelector } from "../../../hooks/hooks"
+import { resetQuery, selectQuery } from "../../../features/qurrentMoviSlice"
+
+import MoviesList from "../../ui/MoviesList/MoviesList"
+import ErrorMessage from "../../ui/ErrorMessage/ErrorMessage"
+import MovieListSkeleton from "../../ui/MovieListSkeleton/MovieListSkeleton"
 import SelectMovies from "../../ui/SelectMovies/SelectMovies"
-import { useAppSelector } from "../../../hooks/hooks"
+
 
 const MoviesListMain: React.FC = () => {
   const location = useLocation()
   const navigate = useNavigate()
-  const [page, setPage] = useState<number>(1)
+  const dispatch = useAppDispatch()
 
-  const {genreId, order, country} = useAppSelector(state => state.mainPage)
-  console.log(genreId, order, country)
-  
-  const movieType = MOVIE_LISTS.find(el => el.url === location.pathname)
-  const {data, error, isLoading} = useGetFilmsQuery({
-    page, 
-    countries: 0, 
-    gengreId: movieType?.title === 'Мультфильмы' ? 18 : 1, 
-    order: '', 
-    type: movieType ? movieType.value : 'FILM',
-  })
+  const initialState = (path: string) => {
+    switch (path) {
+      case '/cartoons':
+        return {
+          genreId: 18, 
+          type: 'FILM'
+        }
+      case '/serials': 
+        return {
+          type: 'TV_SERIES'
+        }
+    }
+  }
+
+  const {genreId, order, country, type, year, page} = useAppSelector(state => state.mainPage)
 
   useEffect(() => {
-    setPage(1)
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    })
+    dispatch(resetQuery(null))
+    dispatch(selectQuery(initialState(location.pathname)))
   }, [location])
+  
+  const movieType = MOVIE_LISTS.find(el => el.url === location.pathname)
+  // const myGenre = movieType?.url === '/cartoons' ? 18 : genreId
+  const {data, error, isLoading} = useGetFilmsQuery({
+    page, 
+    country, 
+    genreId,
+    order, 
+    type,
+    year,
+  })
 
   if (error) return <ErrorMessage />
 
@@ -41,13 +64,12 @@ const MoviesListMain: React.FC = () => {
         <Button startIcon={<ArrowBack />} onClick={() => navigate(-1)} ></Button>
         <Typography variant="h4">{movieType?.title}</Typography>
       </Stack>
-      <SelectMovies />
+      <SelectMovies initialState={initialState(location.pathname)}/>
 
       {data ? <MoviesList 
         movies={data.items} 
         totalPages={data.totalPages}
-        page={page}
-        setPage={setPage}/>: <h2>No Movies</h2>}
+        page={page}/>: <h2>No Movies</h2>}
     </>
   )
 }

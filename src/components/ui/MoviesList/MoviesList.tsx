@@ -1,14 +1,16 @@
 import { Pagination, Stack } from "@mui/material"
 import MovieCard, { IMovie } from "../MovieCard/MovieCard"
+import { useAppDispatch } from "../../../hooks/hooks"
+import { selectQuery } from "../../../features/qurrentMoviSlice"
 
 interface IMoviesList {
     movies: IMovie[],
     page: number,
-    setPage: React.Dispatch<React.SetStateAction<number>>,
     totalPages: number
 }
 
-const MoviesList = ({movies, page, setPage, totalPages}: IMoviesList) => {
+const MoviesList = ({movies, page, totalPages}: IMoviesList) => {
+  const dispatch = useAppDispatch()
 
   return (
     <>
@@ -24,7 +26,7 @@ const MoviesList = ({movies, page, setPage, totalPages}: IMoviesList) => {
             top: 0,
             behavior: "smooth",
           })
-          setPage(value)
+          dispatch(selectQuery({page: value}))
         }}
         variant="outlined"
         shape="rounded"

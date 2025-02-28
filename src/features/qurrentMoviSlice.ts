@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface IInitialState {
-    country: string,
+    country: number,
     genreId: number,
     order: string,
     type: string,
@@ -10,9 +10,9 @@ export interface IInitialState {
 }
 
 const initialState: IInitialState = {
-    country: '',
+    country: 0,
     genreId: 0,
-    order: '',
+    order: 'NUM_VOTE',
     type: '',
     year: 0,
     page: 1,
@@ -26,9 +26,13 @@ export const currentMovieSlice = createSlice({
             ...state,
             ...action.payload
         }),
-        resetQuery: () => ({
-            ...initialState,
-        })
+        resetQuery: (_, action: PayloadAction<any>) => {
+            if (action.payload) {
+                return {...initialState, ...action.payload}
+            } else {
+                return {...initialState}
+            }
+        }
     }
 })
 

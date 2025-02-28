@@ -5,10 +5,11 @@ import { SelectChangeEvent } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "../../../hooks/hooks";
 import { selectQuery, resetQuery } from "../../../features/qurrentMoviSlice";
 
-const SelectMovies = () => {
+const SelectMovies = ({initialState}: any) => {
     const {order, country, year, genreId} = useAppSelector(state => state.mainPage)
     const dispatch = useAppDispatch()
     const {data, error, isLoading} = useGetGenresAndCountriesQuery()
+    const page = 1
 
     const orderList = [{
         title: 'По рейтингу',
@@ -22,19 +23,19 @@ const SelectMovies = () => {
     const yearsArr = new Array(60).fill(null).map((_, i) => new Date().getFullYear() - i)
 
     const handleSort = (e: SelectChangeEvent<unknown>) => {
-        dispatch(selectQuery({order: e.target.value}))
+        dispatch(selectQuery({order: e.target.value, page}))
     }
 
     const handleCountry = (e: SelectChangeEvent<unknown>) => {
-        dispatch(selectQuery({country: e.target.value}))
+        dispatch(selectQuery({country: e.target.value, page}))
     }
 
     const handleGenres = (e: SelectChangeEvent<unknown>) => {
-        dispatch(selectQuery({genreId: e.target.value}))
+        dispatch(selectQuery({genreId: e.target.value, page}))
     }
 
     const handleYear = (e: SelectChangeEvent<unknown>) => {
-        dispatch(selectQuery({year: e.target.value}))
+        dispatch(selectQuery({year: e.target.value, page}))
     }
 
     return (
@@ -54,7 +55,7 @@ const SelectMovies = () => {
                 <Select 
                     label="Страна" 
                     labelId="demo-simple-select-label"
-                    value={country}
+                    value={country ? country : ''}
                     onChange={handleCountry}>
                     {data?.countries.map(country => <MenuItem key={country.id} value={country.id}>{country.country}</MenuItem>)}
                 </Select>
@@ -81,9 +82,10 @@ const SelectMovies = () => {
             </FormControl>
             <Box>
                 <Button 
+                    sx={{pt: '15px', pb: '14px'}}
                     variant="outlined" 
                     startIcon={<CloseIcon />}
-                    onClick={() => dispatch(resetQuery())}>
+                    onClick={() => dispatch(resetQuery(initialState))}>
                     Сбросить
                     </Button>
             </Box>
