@@ -3,8 +3,12 @@ import { Skeleton, Stack } from "@mui/material"
 const MovieListSkeleton = () => {
   return (
     <>
-    <Stack justifyContent={'left'} ml={12} mb={2}>
+    <Stack justifyContent={'left'} mb={1}>
     <Skeleton animation='wave' variant="text" width='300px' height='50px'/>
+
+    </Stack>
+    <Stack justifyContent={'left'} mb={1} fontSize={'20px'}>
+    <Skeleton animation='wave' variant="text" width='100%' height='70px'/>
 
     </Stack>
 

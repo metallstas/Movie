@@ -56,20 +56,7 @@ export const kinopoiskApi = createApi({
                 year,
                 page,
             }) => {
-                console.log(
-                    {
-                        country,
-                        genreId,
-                        order,
-                        type,
-                        year,
-                        page,
-                    }
-                )
                 return `/v2.2/films?countries=${country ? country : ''}&genres=${genreId ? genreId : ''}&order=${order ? order: 'NUM_VOTE'}&type=${type ? type : 'FILM'}&ratingFrom=0&ratingTo=10&yearFrom=${year ? year : '1000'}&yearTo=${year ? year : '3000'}&page=${page}`},
-        }),
-        getFilmById: builder.query<any, {id: number}>({
-            query: ({id}) => `/v2.2/films/${id}`
         }),
         getGenresAndCountries: builder.query<{genres: IGenres[], countries: ICountries[]}, void>({
             query: () => `/v2.2/films/filters`,
@@ -77,9 +64,25 @@ export const kinopoiskApi = createApi({
                 ...response,
                 genres: response.genres.filter(({genre}) => !excludeGenres.includes(genre))
             })
+        }),
+        getFilmById: builder.query<any, {id: number}>({
+            query: ({id}) => `/v2.2/films/${id}`
+        }),
+        getSequelsAndPrequels: builder.query<any, {id: number}>({
+            query: ({id}) => `/v2.1/films/${id}/sequels_and_prequels`
+        }),
+        getStuffByFilm: builder.query<any, {id: number}>({
+            query: ({id}) => `/v1/staff?filmId=${id}`
         })
     })
 
 })
 
-export const {useGetFilmsTopQuery, useGetFilmsQuery, useGetFilmByIdQuery, useGetGenresAndCountriesQuery} = kinopoiskApi
+export const {
+    useGetFilmsTopQuery, 
+    useGetFilmsQuery, 
+    useGetFilmByIdQuery, 
+    useGetGenresAndCountriesQuery,
+    useGetSequelsAndPrequelsQuery,
+    useGetStuffByFilmQuery, 
+} = kinopoiskApi

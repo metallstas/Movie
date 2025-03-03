@@ -44,7 +44,6 @@ const MoviesListMain: React.FC = () => {
   }, [location])
   
   const movieType = MOVIE_LISTS.find(el => el.url === location.pathname)
-  // const myGenre = movieType?.url === '/cartoons' ? 18 : genreId
   const {data, error, isLoading} = useGetFilmsQuery({
     page, 
     country, 

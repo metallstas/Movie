@@ -37,6 +37,7 @@ const CarouselFilm = ({items}: ICarousel) => {
   return (
     <div>
       <Carousel responsive={responsive}
+        arrows={true}
         swipeable={true}
         draggable={true}
         showDots={false}
@@ -47,7 +48,7 @@ const CarouselFilm = ({items}: ICarousel) => {
         keyBoardControl={true}
         customTransition="all .5s"
         transitionDuration={500}
-        removeArrowOnDeviceType={["tablet", "mobile"]}
+        removeArrowOnDeviceType={["mobile"]}
         dotListClass="custom-dot-list-style"
         itemClass="carousel-item-padding-40-px"
         >

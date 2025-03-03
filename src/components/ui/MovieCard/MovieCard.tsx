@@ -26,10 +26,10 @@ const MovieCard = ({movie}: {movie: IMovie}) => {
   return (
     <Stack className={styles.card}>
         <div className={styles.card__link}>
-            <RouterLink to={`movie/${movie.kinopoiskId}`}>
+            <RouterLink to={`/movie/${movie.kinopoiskId}`}>
                 <img src={movie.posterUrlPreview} alt={movie.nameRu ? movie.nameRu : 'posterFilm'} className={styles.img}/>
             </RouterLink>
-            <Link sx={{width: '200px', margin: '0 auto'}} component={RouterLink} to={`movie/${movie.kinopoiskId}`} textAlign='center'>{movie.nameRu ? movie.nameRu : movie.nameEn}</Link>
+            <Link sx={{width: '200px', margin: '0 auto'}} component={RouterLink} to={`/movie/${movie.kinopoiskId}`} textAlign='center'>{movie.nameRu ? movie.nameRu : movie.nameEn}</Link>
         </div>
         {movie.ratingKinopoisk && (
             <Tooltip sx={{margin: '0 auto'}} title={`${movie.ratingKinopoisk} / 10`}>

@@ -15,8 +15,7 @@ const Movies = () => {
     responsePopular,
     responseSerials,
   } = useMoviesQuery()
-  // console.log(responseBest.data ? responseBest.data.items : null)
-
+ 
   const carouselArr = [
     {
       title: 'Популярные фильмы',

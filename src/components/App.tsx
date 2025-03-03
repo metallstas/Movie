@@ -1,7 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router"
 import Layout from "./Layout"
 import Movies from "./pages/Movies/Movies"
-import MoviesDetail from "./pages/MovieDetail/MovieDetail"
+import MovieDetail from "./pages/MovieDetail/MovieDetail"
 import ActorDetail from "./pages/ActorDitale/ActorDetail"
 import { MOVIE_LISTS, TOP_LISTS } from "./constants"
 import MoviesListTop from "./pages/MoviesListTop/MoviesListTop"
@@ -27,7 +27,7 @@ function App() {
         })),
         {
           path: '/movie/:id',
-          element: <MoviesDetail/>
+          element: <MovieDetail/>
         },
         {
           path: '/actor/:id',

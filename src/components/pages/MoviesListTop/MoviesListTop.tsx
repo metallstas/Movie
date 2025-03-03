@@ -35,7 +35,7 @@ const MoviesListTop: React.FC = () => {
         movies={data.items} 
         totalPages={data.totalPages}
         page={page}
-        setPage={setPage}/>: <h2>No Movies</h2>}
+        />: <h2>No Movies</h2>}
     </>
   )
 }
