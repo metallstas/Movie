@@ -4,14 +4,26 @@ import { IInitialState } from "../features/qurrentMoviSlice";
 
 const kinopoiskKey = import.meta.env.VITE_KINOPOISK_KEY
 
-// interface IFilm {
-//     country?: number,
-//     genreId: number,
-//     order?: string,
-//     type: string,
-//     year?: number,
-//     page?: number,
-// }
+interface IStaff {
+    staffId: number,
+    nameRu: string,
+    nameEn: string,
+    description: null | string,
+    posterUrl: string,
+    professionText: string,
+    professionKey : string,
+}
+
+
+export interface ISequelsAndPrequels{
+    filmId: number,
+    nameRu: string,
+    nameEn: string,
+    nameOriginal: string,
+    posterUrl: string,
+    posterUrlPreview: string
+    relationType: string
+}
 
 export interface IGenres {
     id: number,
@@ -68,10 +80,10 @@ export const kinopoiskApi = createApi({
         getFilmById: builder.query<any, {id: number}>({
             query: ({id}) => `/v2.2/films/${id}`
         }),
-        getSequelsAndPrequels: builder.query<any, {id: number}>({
+        getSequelsAndPrequels: builder.query<ISequelsAndPrequels [], {id: number}>({
             query: ({id}) => `/v2.1/films/${id}/sequels_and_prequels`
         }),
-        getStuffByFilm: builder.query<any, {id: number}>({
+        getStuffByFilm: builder.query<IStaff [], {id: number}>({
             query: ({id}) => `/v1/staff?filmId=${id}`
         })
     })

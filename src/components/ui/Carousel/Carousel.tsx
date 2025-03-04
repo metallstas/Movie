@@ -35,7 +35,7 @@ const CarouselFilm = ({items}: ICarousel) => {
   }
  
   return (
-    <div>
+    <div className={style.carousel}>
       <Carousel responsive={responsive}
         arrows={true}
         swipeable={true}

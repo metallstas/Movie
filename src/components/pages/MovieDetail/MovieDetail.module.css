@@ -18,17 +18,47 @@
 
 .info {
 	width: 50%;
+	padding-left: 15px;
 }
 
 .navigate {
 	display: flex;
 }
 
-.info_year {
+.wrapper {
 	display: flex;
 	width: 100%;
+	margin-bottom: 10px;
+}
+
+.wrapper:nth-child(6) {
+	margin-bottom: 30px;
+}
+
+.wrapper h3 {
+	font-size: 30px;
 }
 
 .actors {
 	width: 20%;
+}
+
+.item {
+	width: 50%;
+	text-align: left;
+}
+
+.block {
+	display: flex;
+	justify-content: center;
+}
+
+.sequels {
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.cards {
+	display: flex;
 }
