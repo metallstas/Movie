@@ -1,13 +1,16 @@
 import { useNavigate, useParams } from "react-router"
 import { useGetFilmByIdQuery, useGetSequelsAndPrequelsQuery, useGetStuffByFilmQuery } from "../../../services/kinopoiskApi"
 import style from './MovieDetail.module.css'
-import { Box, Button, CircularProgress, Rating } from "@mui/material"
+import { Box, Button, CircularProgress, Rating, useMediaQuery } from "@mui/material"
 import ErrorMessage from "../../ui/ErrorMessage/ErrorMessage"
 import { ArrowBack, Language, Movie } from "@mui/icons-material"
 import MovieCardSquels from "../../ui/MovieCardSequels/MovieCardSequels"
+import AllInclusiveIcon from '@mui/icons-material/AllInclusive';
+import VideoPlayer from "../../ui/VideoPlayer/VideoPlayer"
 
 const MovieDetail = () => {
     const navigate = useNavigate()
+    const isMobile = useMediaQuery('(max-width: 630px)')
     const {id} = useParams()
     const responseFilm = useGetFilmByIdQuery({id: id ? +id : 0})
     const responseSequels = useGetSequelsAndPrequelsQuery({id: id ? +id : 0})
@@ -28,7 +31,7 @@ const MovieDetail = () => {
     }
 
   return (
-    <section className={style.container}>
+    <section onResize={e => console.log(e)} className={style.container}>
         <div className={style.main_section}>
             <div className={style.poster}>
                 <img className={style.img} src={responseFilm.data.posterUrl} alt={responseFilm.data.nameRu} />
@@ -61,13 +64,17 @@ const MovieDetail = () => {
                 <div className={style.wrapper}>
                     <p className={style.item}>Режиссер</p>
                     <div className={style.item}>
-                    {responseStuff.data?.filter(el => el.professionKey === 'DIRECTOR').map(el => <p 
-                    key={el.staffId}>{el.nameRu}</p>)}
+                    {responseStuff.data?.filter(el => el.professionKey === 'DIRECTOR')
+                        .slice(0, 4)
+                        .map(el => <p key={el.staffId}>{el.nameRu}</p>)}
                     </div>
                 </div>
                 <div className={style.wrapper}>
                     <p className={style.item}>Время</p>
-                    <p className={style.item}>{`${responseFilm.data.filmLength} мин`}</p>
+                    <p className={style.item}>
+                        {responseFilm.data.filmLength ?
+                         `${responseFilm.data.filmLength} мин` : 
+                        <AllInclusiveIcon />}</p>
                 </div>
 
                 <div>
@@ -83,13 +90,11 @@ const MovieDetail = () => {
                         <p>{`${responseFilm.data.ratingKinopoisk} / 10`}</p>  
                     </Box>
                 </div>
-                <div>
+                <div className={style.actors__list}>
                     <p>В главных ролях</p>
-                    {responseStuff.data?.map((el, i) => {
-                        if (el.professionKey === 'ACTOR' && i <= 10) {
-                            return <p key={el.nameRu}>{el.nameRu}</p>
-                        }
-                    })}
+                    {responseStuff.data?.filter((el) => el.professionKey === 'ACTOR')
+                        .slice(0, 10)
+                        .map(el => isMobile ? <p key={el.staffId}>{el.nameRu},&nbsp;</p> : <p key={el.staffId}>{el.nameRu}</p> )}
                 </div>
             </div>
             
@@ -109,8 +114,7 @@ const MovieDetail = () => {
             endIcon={<Movie />}>IMDB</Button>
         </div>
         <div className={style.block}>
-            <p>Плеер</p>
-            
+            <VideoPlayer />
         </div>
         <div className={`${style.block} ${style.sequels}`}>
             {!responseSequels.error ? <p>Сиквелы и приквелы</p> : null}

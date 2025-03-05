@@ -51,6 +51,7 @@
 .block {
 	display: flex;
 	justify-content: center;
+	margin: 15px 0;
 }
 
 .sequels {
@@ -61,4 +62,39 @@
 
 .cards {
 	display: flex;
+}
+
+@media (max-width: 630px) {
+	.main_section {
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.poster {
+		width: 100%;
+	}
+
+	.info {
+		width: 100%;
+	}
+
+	.actors {
+		width: 100%;
+		padding-left: 15px;
+		padding-top: 20px;
+	}
+
+	.actors__list {
+		display: flex;
+		flex-wrap: wrap;
+	}
+
+	.actors__list p:first-child {
+		width: 100%;
+	}
+
+	.cards {
+		flex-direction: column;
+	}
 }
