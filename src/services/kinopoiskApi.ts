@@ -14,7 +14,6 @@ interface IStaff {
     professionKey : string,
 }
 
-
 export interface ISequelsAndPrequels{
     filmId: number,
     nameRu: string,

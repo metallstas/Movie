@@ -22,10 +22,10 @@ export const currentMovieSlice = createSlice({
     name: 'currentMovieSlice',
     initialState,
     reducers: {
-        selectQuery: (state, action: PayloadAction<any>) => ({
-            ...state,
-            ...action.payload
-        }),
+        selectQuery: (state, action: PayloadAction<any>) => {
+            return {...state,
+            ...action.payload}
+        },
         resetQuery: (_, action: PayloadAction<any>) => {
             if (action.payload) {
                 return {...initialState, ...action.payload}

@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react"
 import { useGetFilmsTopQuery } from "../../../services/kinopoiskApi"
 import { TOP_LISTS } from "../../constants"
 import { useLocation, useNavigate } from "react-router"
@@ -7,15 +6,13 @@ import MoviesList from "../../ui/MoviesList/MoviesList"
 import { ArrowBack } from "@mui/icons-material"
 import ErrorMessage from "../../ui/ErrorMessage/ErrorMessage"
 import MovieListSkeleton from "../../ui/MovieListSkeleton/MovieListSkeleton"
+import { useAppSelector } from "../../../hooks/hooks"
 
 const MoviesListTop: React.FC = () => {
   const location = useLocation()
   const navigate = useNavigate()
-  const [page, setPage] = useState<number>(1)
 
-  useEffect(() => {
-    setPage(1)
-  }, [location])
+  const {page} = useAppSelector(state => state.mainPage)
 
   const collection = TOP_LISTS.find(el => el.url === location.pathname)
 

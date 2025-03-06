@@ -4,7 +4,7 @@ import { useAppSelector } from "./hooks"
 
 const useMoviesQuery = () => {
   const {page, country, order, year, } = useAppSelector(state => state.mainPage)
-  
+
   const responsePopular = useGetFilmsTopQuery({
     type: TOP_LISTS[0].value,
     page,

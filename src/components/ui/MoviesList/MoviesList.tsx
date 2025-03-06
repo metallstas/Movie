@@ -11,7 +11,6 @@ interface IMoviesList {
 
 const MoviesList = ({movies, page, totalPages}: IMoviesList) => {
   const dispatch = useAppDispatch()
-
   return (
     <>
       <Stack direction="row" justifyContent='center' flexWrap='wrap' >
