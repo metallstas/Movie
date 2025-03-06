@@ -114,7 +114,7 @@ const MovieDetail = () => {
             endIcon={<Movie />}>IMDB</Button>
         </div>
         <div className={style.block}>
-            <VideoPlayer id={id ? +id : 0}/>
+            <VideoPlayer />
         </div>
         <div className={`${style.block} ${style.sequels}`}>
             {!responseSequels.error ? <p>Сиквелы и приквелы</p> : null}
