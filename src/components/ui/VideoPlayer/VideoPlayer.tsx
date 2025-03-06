@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react"
 
 import styles from './VideoPlayer.module.css'
-// import { useGetTrailerQuery } from "../../../services/kinopoiskApi"
-// import { useLocation } from "react-router"
-//https://hdsrch.com/storage/pcaller-7a1859a6.js?uh=a8ad98cb89116864&kpid=__ИД_КИНОПОИСКА__
+
 const VideoPlayer = () => {
     const [scriptHtml, setScriptHtml] = useState('');
   
