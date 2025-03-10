@@ -1,7 +1,7 @@
 import { Pagination, Stack } from "@mui/material"
 import MovieCard, { IMovie } from "../MovieCard/MovieCard"
 import { useAppDispatch } from "../../../hooks/hooks"
-import { selectQuery } from "../../../features/qurrentMoviSlice"
+import { selectQuery } from "../../../features/qurrentMovieSlice"
 
 interface IMoviesList {
     movies: IMovie[],

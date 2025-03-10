@@ -1,11 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { kinopoiskApi } from "../services/kinopoiskApi";
-import { movieReducer } from "../features/qurrentMoviSlice";
+import { movieReducer } from "../features/qurrentMovieSlice";
+import { searchReducer } from "../features/searchMovieSlice";
 
 export const store = configureStore({
     reducer: {
         [kinopoiskApi.reducerPath]: kinopoiskApi.reducer,
         mainPage: movieReducer,
+        searchSlice: searchReducer,
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(kinopoiskApi.middleware),
 })

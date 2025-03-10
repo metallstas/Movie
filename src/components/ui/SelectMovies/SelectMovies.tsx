@@ -3,7 +3,7 @@ import CloseIcon from '@mui/icons-material/Close'
 import { useGetGenresAndCountriesQuery } from "../../../services/kinopoiskApi"
 import { SelectChangeEvent } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "../../../hooks/hooks";
-import { selectQuery, resetQuery } from "../../../features/qurrentMoviSlice";
+import { selectQuery, resetQuery } from "../../../features/qurrentMovieSlice";
 
 const SelectMovies = ({initialState}: any) => {
     const {order, country, year, genreId} = useAppSelector(state => state.mainPage)

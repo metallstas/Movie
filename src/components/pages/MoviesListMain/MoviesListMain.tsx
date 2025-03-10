@@ -5,7 +5,7 @@ import { ArrowBack } from "@mui/icons-material"
 import { MOVIE_LISTS } from "../../constants"
 import { useGetFilmsQuery } from "../../../services/kinopoiskApi"
 import { useAppDispatch, useAppSelector } from "../../../hooks/hooks"
-import { resetQuery, selectQuery } from "../../../features/qurrentMoviSlice"
+import { resetQuery, selectQuery } from "../../../features/qurrentMovieSlice"
 
 import MoviesList from "../../ui/MoviesList/MoviesList"
 import ErrorMessage from "../../ui/ErrorMessage/ErrorMessage"

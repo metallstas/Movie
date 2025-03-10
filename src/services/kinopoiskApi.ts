@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { IMovie } from "../components/ui/MovieCard/MovieCard";
-import { IInitialState } from "../features/qurrentMoviSlice";
+import { IInitialState } from "../features/qurrentMovieSlice";
+import { ISearchMovie } from "../features/searchMovieSlice";
 
 const kinopoiskKey = import.meta.env.VITE_KINOPOISK_KEY
 
@@ -58,7 +59,7 @@ export const kinopoiskApi = createApi({
             query: ({type, page}) => `/v2.2/films/collections?type=${type}&page=${page}`,
         
         }),
-        getFilms: builder.query<IData, IInitialState>({
+        getFilms: builder.query<IData, ISearchMovie>({
             query: ({
                 country,
                 genreId,
@@ -66,8 +67,9 @@ export const kinopoiskApi = createApi({
                 type,
                 year,
                 page,
+                keyword,
             }) => {
-                return `/v2.2/films?countries=${country ? country : ''}&genres=${genreId ? genreId : ''}&order=${order ? order: 'NUM_VOTE'}&type=${type ? type : 'FILM'}&ratingFrom=0&ratingTo=10&yearFrom=${year ? year : '1000'}&yearTo=${year ? year : '3000'}&page=${page}`},
+                return `/v2.2/films?countries=${country ? country : ''}&genres=${genreId ? genreId : ''}&order=${order ? order: 'NUM_VOTE'}&type=${type ? type : 'FILM'}&ratingFrom=0&ratingTo=10&yearFrom=${year ? year : '1000'}&yearTo=${year ? year : '3000'}&page=${page}&keyword=${keyword}`},
         }),
         getGenresAndCountries: builder.query<{genres: IGenres[], countries: ICountries[]}, void>({
             query: () => `/v2.2/films/filters`,
