@@ -15,12 +15,14 @@ import {
   Slide,
   Link,
   useScrollTrigger,
-  Divider
+  Divider,
+  Stack
 } from '@mui/material';
 import { useState } from 'react';
 import { Link as RouterLink } from 'react-router';
 import { MOVIE_LISTS, TOP_LISTS } from '../../constants';
 import { ITop } from '../../constants';
+import Search from '../Search/Search';
 
 const Navbar = () => {
   const [isOpen, setOpen] = useState<boolean>(false)
@@ -70,12 +72,19 @@ const Navbar = () => {
                 </List>
               </Box>
             </Drawer>
-            <Typography 
-              variant='h4'
-              sx={{color: '#fff', textDecoration: 'none'}} 
-              component={RouterLink} to={'/'}>
-              Betflix
-            </Typography>
+            <Stack 
+              flexDirection='row' 
+              justifyContent={'space-between'} 
+              alignItems={'center'}
+              width={'100%'}>
+              <Typography 
+                variant='h4'
+                sx={{color: '#fff', textDecoration: 'none'}} 
+                component={RouterLink} to={'/'}>
+                Betflix
+              </Typography>
+              <Search />
+            </Stack>
           </Toolbar>
         </Container>
       </AppBar>
