@@ -7,7 +7,7 @@ import { Box, Container } from "@mui/material"
 const Layout  = () => {
   return (
     <Container fixed sx={{display: 'flex', flexDirection: 'column', minHeight: '97vh'}}>
-      <Box sx={{paddingTop: 10}} />
+      <Box sx={{paddingTop: '110px'}} />
       <Navbar />
       <Outlet />
       <Footer />
