@@ -1,0 +1,60 @@
+.actor_info {
+    display: flex;
+}
+
+.wrapper_info {
+    width: 100%;
+    padding-left: 20px;
+}
+
+.actor_img {
+    width: auto;
+    height: fit-content;
+}
+
+.actor_name {
+    display: flex;
+}
+
+.actor_name h3 {
+    font-size: 25px;
+}
+
+.title_about {
+    font-size: 25px;
+}
+
+.facts p {
+    margin-bottom: 5px;
+    font-weight: 700;
+}
+
+.about_actor {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 7px;
+}
+
+.about_actor p:first-child {
+    font-weight: 700;
+}
+
+.film {
+    display: flex;
+    padding: 2.5px 2.5px;
+    text-decoration: none;
+    color: black;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.film:hover {
+    box-shadow: 5px 5px 5px rgba(223, 223, 223, 0.918);
+}
+
+.film_name {
+    text-align: left;
+    text-decoration: none;
+    color: rgb(62, 126, 222);
+    margin-right: auto;
+}

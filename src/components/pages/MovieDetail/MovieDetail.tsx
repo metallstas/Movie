@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from "react-router"
+import { Link, useNavigate, useParams } from "react-router"
 import { useGetFilmByIdQuery, useGetSequelsAndPrequelsQuery, useGetStuffByFilmQuery } from "../../../services/kinopoiskApi"
 import style from './MovieDetail.module.css'
 import { Box, Button, CircularProgress, Rating, useMediaQuery } from "@mui/material"
@@ -15,9 +15,7 @@ const MovieDetail = () => {
     const responseFilm = useGetFilmByIdQuery({id: id ? +id : 0})
     const responseSequels = useGetSequelsAndPrequelsQuery({id: id ? +id : 0})
     const responseStuff = useGetStuffByFilmQuery({id: id ? +id : 0})
-    // console.log(responseFilm, responseSequels, responseStuff)
-    // console.log(responseSequels)
-    // console.log(id ? +id : '')
+    
 
     if (responseFilm.isLoading ||
         responseSequels.isLoading || 
@@ -39,7 +37,7 @@ const MovieDetail = () => {
             <div className={style.info}>
                 <div className={style.wrapper}>
                     <Button startIcon={<ArrowBack />} onClick={() => navigate(-1)} ></Button>
-                    <h3>{responseFilm.data.nameRu}</h3>
+                    <h3>{responseFilm.data.nameRu ? responseFilm.data.nameRu : responseFilm.data.nameEn}</h3>
                 </div>
                 <div className={style.wrapper}>
                     <p className={style.item}>Год</p>
@@ -87,14 +85,26 @@ const MovieDetail = () => {
                 <div>
                     <Box>
                         <Rating name="read-only" value={responseFilm.data.ratingKinopoisk / 2 } readOnly precision={0.1}/>  
-                        <p>{`${responseFilm.data.ratingKinopoisk} / 10`}</p>  
+                        {responseFilm.data.ratingKinopoisk ? <p style={{marginBottom: '15px'}}>{`${responseFilm.data.ratingKinopoisk} / 10`} </p> : <p style={{marginBottom: '15px'}}>Нет оценок</p>}  
                     </Box>
                 </div>
                 <div className={style.actors__list}>
-                    <p>В главных ролях</p>
+                    <p>В главных ролях: </p>
                     {responseStuff.data?.filter((el) => el.professionKey === 'ACTOR')
                         .slice(0, 10)
-                        .map(el => isMobile ? <p key={el.staffId}>{el.nameRu},&nbsp;</p> : <p key={el.staffId}>{el.nameRu}</p> )}
+                        .map(el => isMobile ? 
+                        <Link 
+                            to={`/actor/${el.staffId}`} 
+                            className={style.actor} 
+                            key={el.staffId}>
+                                {el.nameRu},&nbsp;
+                            </Link> : 
+                        <Link 
+                            to={`/actor/${el.staffId}`} 
+                            className={style.actor} 
+                            key={el.staffId}>
+                                {el.nameRu}
+                        </Link> )}
                 </div>
             </div>
             

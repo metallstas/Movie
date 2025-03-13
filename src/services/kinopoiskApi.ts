@@ -14,6 +14,36 @@ interface IStaff {
     professionKey : string,
 }
 
+export interface IActorFilms {
+    description: string,
+    filmId: number,
+    general: boolean,
+    nameEn: string,
+    nameRu: string,
+    professionKey: string,
+    rating: string
+}
+
+export interface IActor {
+    age: number,
+    birthday: string,
+    birthplace: string,
+    death: null | string,
+    deathplace: null | string,
+    facts: string[],
+    films: IActorFilms[],
+    growth: number,
+    hasAwards: number,
+    nameEn: string,
+    nameRu: string,
+    personId: number,
+    posterUrl: string,
+    profession: string,
+    sex: string,
+    spouses: any[],
+    webUrl: string,
+}
+
 export interface ISequelsAndPrequels{
     filmId: number,
     nameRu: string,
@@ -85,6 +115,9 @@ export const kinopoiskApi = createApi({
         }),
         getStuffByFilm: builder.query<IStaff [], {id: number}>({
             query: ({id}) => `/v1/staff?filmId=${id}`
+        }),
+        getActorById: builder.query<IActor, {id: number}>({
+            query: ({id}) => `/v1/staff/${id}`
         })
     })
 
@@ -96,5 +129,6 @@ export const {
     useGetFilmByIdQuery, 
     useGetGenresAndCountriesQuery,
     useGetSequelsAndPrequelsQuery,
-    useGetStuffByFilmQuery, 
+    useGetStuffByFilmQuery,
+    useGetActorByIdQuery
 } = kinopoiskApi

@@ -8,6 +8,28 @@ import MoviesListTop from "./pages/MoviesListTop/MoviesListTop"
 import MoviesListMain from "./pages/MoviesListMain/MoviesListMain"
 
 function App() {
+  // interface iA {
+  //   a: number,
+  //   b: number,
+  //   id: number
+  // }
+  // const a: iA[] = [{a: 1, b: 2, id: 113}, {a: 1, b: 2, id: 113}, {a: 4, b: 2, id: 222}]
+  // const arr = a.reduce((acc, cur) => {
+ 
+  //     const id = acc.find(el => el.id === cur.id)
+
+  //     if (id) {
+  //       return acc
+  //     }
+
+  //     return [...acc, cur]
+    
+    
+  // },[] as iA[])
+
+  //  console.log('result', arr)
+
+  
   const router = createBrowserRouter([
     {
       path: '/',
