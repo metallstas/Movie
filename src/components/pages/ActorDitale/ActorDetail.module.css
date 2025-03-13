@@ -58,3 +58,9 @@
     color: rgb(62, 126, 222);
     margin-right: auto;
 }
+
+@media screen and (max-width: 630px) {
+    .actor_info {
+        flex-direction: column;
+    }
+}
