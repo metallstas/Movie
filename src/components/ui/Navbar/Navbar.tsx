@@ -18,14 +18,23 @@ import {
   Divider,
   Stack
 } from '@mui/material';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link as RouterLink } from 'react-router';
 import { MOVIE_LISTS, TOP_LISTS } from '../../constants';
 import { ITop } from '../../constants';
 import Search from '../Search/Search';
 
+// import styles from './Navbar.module.css'
+
 const Navbar = () => {
   const [isOpen, setOpen] = useState<boolean>(false)
+  const [width, setWidth] = useState(window.innerWidth)
+
+  useEffect(() => {
+    const handleResize = () => setWidth(window.innerWidth)
+    window.addEventListener('resize', handleResize)
+    return () => removeEventListener('resize', handleResize)
+  }, [])
 
   const topCategory = (arr: ITop[]) => (
       arr.map(item => (
@@ -42,7 +51,6 @@ const Navbar = () => {
        ))
     )
   
-
   const trigger = useScrollTrigger({
     target: window,
   })
@@ -50,7 +58,10 @@ const Navbar = () => {
     setOpen(prev => !prev)
   }
 
+  console.log(width)
+
   return (
+    <>
     <Slide appear={false} direction="down" in={!trigger}>
       <AppBar>
         <Container maxWidth='lg'>
@@ -83,12 +94,14 @@ const Navbar = () => {
                 component={RouterLink} to={'/'}>
                 Betflix
               </Typography>
-              <Search />
+                {width < 440 ? null : <Search />}
             </Stack>
           </Toolbar>
         </Container>
       </AppBar>
       </Slide>
+      {width < 440 ?  <Search /> : null}
+      </>
   );
 }
 

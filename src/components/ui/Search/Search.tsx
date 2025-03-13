@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from "../../../hooks/hooks"
 import React, { useEffect, useState } from "react"
 import { setSearchQuery } from "../../../features/searchMovieSlice"
 import { useNavigate } from "react-router"
+import styles from './Search.module.css'
 
 const movieTypes = {
     FILM: 'Фильм',
@@ -43,7 +44,7 @@ const Search = () => {
         keyword: input})
         
     return (
-            <Stack spacing={2} sx={{ width: 300, margin: '20px 0'}}>
+            <Stack className={styles.search} spacing={2}>
             <Autocomplete
                 sx={{backgroundColor: 'rgba(255, 255, 255, 0.858)', borderRadius: '5px', '& .css-113d811-MuiFormLabel-root-MuiInputLabel-root.Mui-focused': {color: 'rgba(0, 0, 0, 0.55)'}}}
                 options={data ? data.items : []}
