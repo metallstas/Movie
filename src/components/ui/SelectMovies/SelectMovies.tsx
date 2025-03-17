@@ -8,7 +8,7 @@ import { selectQuery, resetQuery } from "../../../features/qurrentMovieSlice";
 const SelectMovies = ({initialState}: any) => {
     const {order, country, year, genreId} = useAppSelector(state => state.mainPage)
     const dispatch = useAppDispatch()
-    const {data, error, isLoading} = useGetGenresAndCountriesQuery()
+    const {data} = useGetGenresAndCountriesQuery()
     const page = 1
 
     const orderList = [{
