@@ -60,8 +60,6 @@ const Navbar = () => {
     setOpen(prev => !prev)
   }
 
-  console.log(width)
-
   return (
     <>
     <Slide appear={false} direction="down" in={!trigger}>

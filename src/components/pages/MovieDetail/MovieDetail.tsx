@@ -15,7 +15,6 @@ const MovieDetail = () => {
     const responseFilm = useGetFilmByIdQuery({id: id ? +id : 0})
     const responseSequels = useGetSequelsAndPrequelsQuery({id: id ? +id : 0})
     const responseStuff = useGetStuffByFilmQuery({id: id ? +id : 0})
-    
 
     if (responseFilm.isLoading ||
         responseSequels.isLoading || 
@@ -29,7 +28,7 @@ const MovieDetail = () => {
     }
 
   return (
-    <section onResize={e => console.log(e)} className={style.container}>
+    <section className={style.container}>
         <div className={style.main_section}>
             <div className={style.poster}>
                 <img className={style.img} src={responseFilm.data.posterUrl} alt={responseFilm.data.nameRu} />
