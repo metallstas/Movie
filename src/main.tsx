@@ -6,10 +6,13 @@ import './main.css'
 
 import { store } from './app/store'
 import { CssBaseline } from '@mui/material'
+import ToggleColorMode from './context/ToggleControlMode'
 
 createRoot(document.getElementById('root')!).render(
     <Provider store={store}>
-      <CssBaseline />
-      <App />
+      <ToggleColorMode>
+        <CssBaseline />
+        <App />
+      </ToggleColorMode>
     </Provider>
 )

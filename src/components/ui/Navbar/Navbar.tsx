@@ -18,17 +18,19 @@ import {
   Divider,
   Stack
 } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Link as RouterLink } from 'react-router';
 import { MOVIE_LISTS, TOP_LISTS } from '../../constants';
 import { ITop } from '../../constants';
 import Search from '../Search/Search';
-
-// import styles from './Navbar.module.css'
+import { ColorModeContext } from '../../../context/ToggleControlMode';
+import { Brightness7 } from '@mui/icons-material';
 
 const Navbar = () => {
   const [isOpen, setOpen] = useState<boolean>(false)
   const [width, setWidth] = useState(window.innerWidth)
+
+  const {toggleMode} = useContext(ColorModeContext)
 
   useEffect(() => {
     const handleResize = () => setWidth(window.innerWidth)
@@ -66,12 +68,7 @@ const Navbar = () => {
       <AppBar>
         <Container maxWidth='lg'>
           <Toolbar>
-            <IconButton
-              color="inherit"
-              onClick={handleDrawerToggle}
-            >
-              <MenuIcon />
-            </IconButton>
+            
             <Drawer open={isOpen} onClose={handleDrawerToggle}>
               <Box sx={{width: 250}} onClick={handleDrawerToggle}>
                 <List>
@@ -88,19 +85,31 @@ const Navbar = () => {
               justifyContent={'space-between'} 
               alignItems={'center'}
               width={'100%'}>
-              <Typography 
-                variant='h4'
-                sx={{color: '#fff', textDecoration: 'none'}} 
-                component={RouterLink} to={'/'}>
-                Betflix
-              </Typography>
-                {width < 440 ? null : <Search />}
+               <Stack flexDirection={'row'}>
+                <IconButton
+                color="inherit"
+                onClick={handleDrawerToggle}>
+                <MenuIcon />
+              </IconButton>
+                <Typography 
+                  variant='h4'
+                  sx={{color: '#fff', textDecoration: 'none'}} 
+                  component={RouterLink} to={'/'}>
+                  Betflix
+                </Typography>
+               </Stack>
+                {width < 500 ? null : <Search />}
+
+                <IconButton onClick={toggleMode}>
+              <Brightness7 />
+            </IconButton>
             </Stack>
+            
           </Toolbar>
         </Container>
       </AppBar>
       </Slide>
-      {width < 440 ?  <Search /> : null}
+      {width < 500 ?  <Search /> : null}
       </>
   );
 }

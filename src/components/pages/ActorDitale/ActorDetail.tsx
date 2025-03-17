@@ -4,13 +4,15 @@ import { IActorFilms, useGetActorByIdQuery } from "../../../services/kinopoiskAp
 import styles from './ActorDetail.module.css'
 import { ArrowBack } from "@mui/icons-material"
 import { Button } from "@mui/material"
+import { useContext } from "react"
+import { ColorModeContext } from "../../../context/ToggleControlMode"
 
 const ActorDetail = () => {
     const {id} = useParams()
     const navigate = useNavigate()
-    
-    const {data, error, isLoading} = useGetActorByIdQuery({id: id ? +id : 0})
-    console.log(data, error, isLoading)
+    const {modeTheme} = useContext(ColorModeContext)
+
+    const {data} = useGetActorByIdQuery({id: id ? +id : 0})
 
     const filmsUnic = data?.films.reduce((acc, curr) => {
         const id = acc.find(el => el.filmId === curr.filmId)
@@ -19,8 +21,6 @@ const ActorDetail = () => {
         }
         return [...acc, curr]
     }, [] as IActorFilms[])
-
-    console.log(filmsUnic)
 
     return (
         <section className={styles.actor_detail}>
@@ -56,7 +56,7 @@ const ActorDetail = () => {
                     </div>
                     <div className={styles.facts}>
                         <p>Факты</p>
-                        {data?.facts}
+                        {data?.facts.length !== 0 ? data?.facts : 'Нет фактов про актера'}
                     </div>
                 </div>
             </div>
@@ -65,14 +65,14 @@ const ActorDetail = () => {
                 <ul>
                     {filmsUnic?.map((film, index) => { 
                         return (
-                            <Link to={`/movie/${film.filmId}`} key={film.filmId + `${index}`} className={styles.film}> 
-                                <p style={{width: '40px'}}>{index + 1}</p>
+                            <Link to={`/movie/${film.filmId}`} key={film.filmId + `${index}`} className={modeTheme === 'dark' ? `${styles.film} ${styles.film_dark}` : styles.film}> 
+                                <p className={modeTheme === 'dark' ? styles.number_film : ''} style={{width: '40px'}}>{index + 1}</p>
                                 <p 
                                     className={styles.film_name} 
                                     >
                                         {film.nameRu ? film.nameRu : film.nameEn}
                                 </p>
-                                <p>{film.rating}</p>
+                                <p  className={modeTheme === 'dark' ? styles.number_film : ''}>{film.rating}</p>
                             </Link>
                         )}
                     )}

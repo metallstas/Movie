@@ -59,6 +59,14 @@
     margin-right: auto;
 }
 
+.number_film {
+    color: white;
+}
+
+.film_dark:hover {
+    box-shadow: 0px 2px 0px rgba(115, 115, 116);
+}
+
 @media screen and (max-width: 630px) {
     .actor_info {
         flex-direction: column;
