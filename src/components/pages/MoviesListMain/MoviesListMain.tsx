@@ -50,7 +50,7 @@ const MoviesListMain: React.FC = () => {
     genreId,
     order, 
     type,
-    year,
+    year
   })
 
   if (error) return <ErrorMessage />

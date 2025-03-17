@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IInitialState } from "./qurrentMovieSlice";
 
 export interface ISearchMovie extends IInitialState {
-    keyword: string,
+    keyword?: string,
 }
 
 const initialState: ISearchMovie = {
